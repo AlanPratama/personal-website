@@ -1,0 +1,5 @@
+services:
+  app:
+    build: .,
+    container_name: personal_website
+    restart: always
