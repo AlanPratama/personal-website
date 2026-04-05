@@ -21,4 +21,4 @@ jobs:
           docker compose up -d --build
 
       - name: Done
-        run: echo "Deploy selesai 🚀"
+        run: echo "Deploy selesai"
