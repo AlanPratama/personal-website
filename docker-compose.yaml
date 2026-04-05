@@ -2,4 +2,6 @@ services:
   app:
     build: .,
     container_name: personal_website
+    ports:
+      - "3002:80"
     restart: always
