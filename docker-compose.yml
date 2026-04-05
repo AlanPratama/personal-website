@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  personal-website:
+    build: .
+    container_name: personal-website
+    restart: always
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
