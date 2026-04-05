@@ -1,25 +1,24 @@
-name: Deploy Personal Website
+name: Deploy App
 
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
 
 jobs:
   deploy:
     runs-on: self-hosted
 
     steps:
-      - name: Deploy app
+      - name: Deploy via SSH
         run: |
-          set -e
+          ssh -o StrictHostKeyChecking=no dockerserver@192.168.0.103 << 'EOF'
+            set -e
+            trap 'echo LOG ERROR DEPLOY: ' ERR
 
-          echo "Deploy mulai..."
+            cd /var/www/personal-website
+            git pull origin main
+            docker compose down || true
+            docker compose up -d --build
 
-          cd /var/www/personal-website
-
-          git pull origin main
-
-          docker compose pull || true
-          docker compose up -d --build
-
-          echo "Deploy selesai"
+            echo "DONE"
+          EOF
