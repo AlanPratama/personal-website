@@ -4,4 +4,6 @@ services:
   personal-website:
     build: .
     container_name: personal-website
+    ports:
+      - "3002:80"
     restart: always
