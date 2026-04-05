@@ -1,0 +1,24 @@
+name: Deploy Personal Website
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Pull latest code
+        run: |
+          cd /var/www/personal-website
+          git pull origin main
+
+      - name: Rebuild & restart container
+        run: |
+          cd /var/www/personal-website
+          docker compose down || true
+          docker compose up -d --build
+
+      - name: Done
+        run: echo "Deploy selesai 🚀"
